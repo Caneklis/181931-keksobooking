@@ -114,13 +114,11 @@
     }
   };
 
-
   var resetNoticeFormButton = document.querySelector('.form__reset');
   resetNoticeFormButton.addEventListener('click', function (evt) {
     evt.preventDefault();
     returnInitialPageState();
   });
-
 
   noticeForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
