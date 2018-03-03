@@ -1,16 +1,27 @@
 'use strict';
+
 (function () {
   var URL_LOAD = 'https://js.dump.academy/keksobooking/data';
   var URL_UPLOAD = 'https://js.dump.academy/keksobooking';
+  var TIMEOUT = 30000;
+  var SUCCESS = 200;
+  var BAD_REQUEST_ERROR = 400;
+  var NOT_FOUND_ERROR = 404;
+  var INTERNAL_SERVER_ERROR = 500;
 
+  /**
+   * Функция загрузки данных с сервера
+   * @param {function} onSuccess успешная загрузка
+   * @param {function} onError ошибка
+   */
   var load = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === SUCCESS) {
         onSuccess(xhr.response);
-      } else if (xhr.status === 404) {
+      } else if (xhr.status === NOT_FOUND_ERROR) {
         onError('Ресурс не найден. Ошибка: ' + xhr.status + '' + xhr.statusText);
       } else {
         onError('Неизвестный статус. Ошибка: ' + xhr.status + '' + xhr.statusText);
@@ -25,21 +36,26 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 30000;
+    xhr.timeout = TIMEOUT;
     xhr.open('GET', URL_LOAD);
     xhr.send();
   };
 
-  var upload = function (data, onSuccess, onError) {
+  /**
+   * Функция загрузки информации на сервер
+   * @param {object} data данные
+   * @param {function} onError ошибке
+   */
+  var upload = function (data, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
-        onSuccess(xhr.response);
-      } else if (xhr.status === 400) {
+      if (xhr.status === SUCCESS) {
+        onError('Форма успешно отправлена');
+      } else if (xhr.status === BAD_REQUEST_ERROR) {
         onError('Ошибка: ' + xhr.status + '' + xhr.statusText);
-      } else if (xhr.status === 500) {
+      } else if (xhr.status === INTERNAL_SERVER_ERROR) {
         onError('Не удалось загрузить ресурс. Ошибка: ' + xhr.status + '' + xhr.statusText);
       } else {
         onError('Неизвестный статус. Ошибка: ' + xhr.status + '' + xhr.statusText);
@@ -54,38 +70,13 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 30000;
+    xhr.timeout = TIMEOUT;
     xhr.open('POST', URL_UPLOAD);
     xhr.send(data);
   };
 
-  var onError = function (errorMessage) {
-    var errorPopup = document.createElement('div');
-    var message = document.createElement('p');
-    errorPopup.style.position = 'absolute';
-    errorPopup.style.top = '0';
-    errorPopup.style.left = '0';
-    errorPopup.style.width = '100%';
-    errorPopup.style.margin = '0 auto';
-    errorPopup.style.backgroundColor = 'rgba(255,255,255,0.7)';
-    errorPopup.style.color = 'rgb(249,79,0)';
-    errorPopup.style.fontSize = '30px';
-    errorPopup.style.padding = '50px';
-    errorPopup.style.border = '1px solid rgb(249,79,0)';
-    errorPopup.style.zIndex = '100';
-    errorPopup.style.textAlign = 'center';
-    message.textContent = errorMessage;
-    errorPopup.appendChild(message);
-    document.body.appendChild(errorPopup);
-
-    setTimeout(function () {
-      errorPopup.style.display = 'none';
-    }, 5000);
-  };
-
   window.backend = {
     upload: upload,
-    load: load,
-    onError: onError
+    load: load
   };
 })();

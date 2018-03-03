@@ -19,11 +19,19 @@
     window.form.removeFormDisabled();
   };
 
+  /**
+   * Функция получения данных и помещения их в переменные
+   * @param {Array} data данные с сервера
+   */
   var getData = function (data) {
     window.housesArr = data;
     window.pin.createButtons(data);
   };
 
+  /**
+   * Функция нажатия на главный пин
+   * @param {object} evt событие
+   */
   var mainPinMouseDownHandler = function (evt) {
     evt.preventDefault();
 
@@ -32,6 +40,10 @@
       y: evt.clientY
     };
 
+    /**
+     * Функция перемещения главного пина
+     * @param {object} moveEvt событие
+     */
     var mainPinMouseMoveHandler = function (moveEvt) {
       moveEvt.preventDefault();
 
@@ -56,6 +68,10 @@
       }
     };
 
+    /**
+     * Функция при отпускании главного пина
+     * @param {object} upEvt событие
+     */
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
       setAddress();

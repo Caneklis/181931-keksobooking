@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+  var DEBOUNCE_TIME = 500;
+  var ERROR_MESSAGE_TIME = 5000;
+
   /**
    * Функция генерации случайного числа
    * @param   {number} min Минимальное значение
@@ -22,7 +25,7 @@
 
   /**
    * Функция перемешивания массива
-   * @param   {Array} array
+   * @param   {Array} array Массив
    * @return {Array}
    */
   var shuffleArray = function (array) {
@@ -35,6 +38,11 @@
     return array;
   };
 
+  /**
+   * Функция локализации типа жилья
+   * @param   {object} russianRoomType объект
+   * @return {array} массив
+   */
   var roomType = function (russianRoomType) {
     var roomTypes = {
       flat: 'Квартира',
@@ -44,10 +52,53 @@
     return roomTypes[russianRoomType];
   };
 
+  /**
+   * Функция отрисовки окна с ошибкой
+   * @param {string} errorMessage
+   */
+  var showErrorMessage = function (errorMessage) {
+    var errorPopup = document.createElement('div');
+    var message = document.createElement('p');
+    errorPopup.style.position = 'absolute';
+    errorPopup.style.top = '0';
+    errorPopup.style.left = '0';
+    errorPopup.style.width = '100%';
+    errorPopup.style.margin = '0 auto';
+    errorPopup.style.backgroundColor = 'rgba(255,255,255,0.7)';
+    errorPopup.style.color = 'rgb(249,79,0)';
+    errorPopup.style.fontSize = '30px';
+    errorPopup.style.padding = '50px';
+    errorPopup.style.border = '1px solid rgb(249,79,0)';
+    errorPopup.style.zIndex = '100';
+    errorPopup.style.textAlign = 'center';
+    message.textContent = errorMessage;
+    errorPopup.appendChild(message);
+    document.body.appendChild(errorPopup);
+
+    setTimeout(function () {
+      errorPopup.style.display = 'none';
+    }, ERROR_MESSAGE_TIME);
+  };
+
+  var lastTimeout;
+
+  /**
+  * Функция устранения дребезга
+  * @param {string} action
+  */
+  var debounce = function (action) {
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(action, DEBOUNCE_TIME);
+  };
+
   window.utils = {
     getRandomNumber: getRandomNumber,
     getRandomItem: getRandomItem,
     shuffleArray: shuffleArray,
-    roomType: roomType
+    roomType: roomType,
+    debounce: debounce,
+    showError: showErrorMessage
   };
 })();

@@ -14,7 +14,6 @@
     var popUpTemplate = document.querySelector('template').content;
     var popUpTemlateElement = popUpTemplate.querySelector('article');
     var popUpElement = popUpTemlateElement.cloneNode(true);
-
     popUpElement.querySelector('.popup__close').addEventListener('click', closePopUp);
     popUpElement.querySelector('h3').textContent = houses.offer.title;
     popUpElement.querySelector('p small').textContent = houses.offer.address;
@@ -44,7 +43,6 @@
     map.insertBefore(popUpElement, mapFilters);
   };
 
-
   /**
    * Функция закрытия popup окна при клике
    */
@@ -57,6 +55,10 @@
     }
   };
 
+  /**
+   * Функция обработчика на нажатие ESC
+   * @param {object} evt
+   */
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
       closePopUp();
