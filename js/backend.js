@@ -1,4 +1,5 @@
 'use strict';
+
 (function () {
   var URL_LOAD = 'https://js.dump.academy/keksobooking/data';
   var URL_UPLOAD = 'https://js.dump.academy/keksobooking';
@@ -8,6 +9,11 @@
   var NOT_FOUND_ERROR = 404;
   var INTERNAL_SERVER_ERROR = 500;
 
+  /**
+   * Функция загрузки данных с сервера
+   * @param {function} onSuccess успешная загрузка
+   * @param {function} onError ошибка
+   */
   var load = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
@@ -35,6 +41,11 @@
     xhr.send();
   };
 
+  /**
+   * Функция загрузки информации на сервер
+   * @param {object} data данные
+   * @param {function} onError ошибке
+   */
   var upload = function (data, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';

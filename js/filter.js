@@ -43,4 +43,5 @@
   formFilters.addEventListener('change', function () {
     window.utils.debounce(applyFilters);
   });
+
 })();

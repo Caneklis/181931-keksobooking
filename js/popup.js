@@ -55,6 +55,10 @@
     }
   };
 
+  /**
+   * Функция обработчика на нажатие ESC
+   * @param {object} evt
+   */
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
       closePopUp();

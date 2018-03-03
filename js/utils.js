@@ -3,6 +3,7 @@
 (function () {
   var DEBOUNCE_TIME = 500;
   var ERROR_MESSAGE_TIME = 5000;
+
   /**
    * Функция генерации случайного числа
    * @param   {number} min Минимальное значение
@@ -24,7 +25,7 @@
 
   /**
    * Функция перемешивания массива
-   * @param   {Array} array
+   * @param   {Array} array Массив
    * @return {Array}
    */
   var shuffleArray = function (array) {
@@ -37,6 +38,11 @@
     return array;
   };
 
+  /**
+   * Функция локализации типа жилья
+   * @param   {object} russianRoomType объект
+   * @return {array} массив
+   */
   var roomType = function (russianRoomType) {
     var roomTypes = {
       flat: 'Квартира',

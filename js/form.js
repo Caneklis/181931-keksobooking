@@ -71,6 +71,10 @@
     });
   };
 
+  /**
+   * Функция соотношения комнаты и гостей
+   * @param {string} value значение поля
+   */
   var compareRoomsGuests = function (value) {
     if (+value !== 100) {
       noticeFormRoomCapacity.value = value;
