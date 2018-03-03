@@ -108,7 +108,7 @@
           (filters[i].tagName === 'OPTION' && (
             filters[i].value === 'any' ||
             (filters[i].parentNode.name === 'housing-type' && house.offer.type === filters[i].value) ||
-            (filters[i].parentNode.name === 'housing-price' && (house.offer.price >= window.constants.PRICE_CHECK[filters[i].value].min) &&
+            (filters[i].parentNode.name === 'housing-price' && (house.offer.price >= window.data.priceCheck[filters[i].value].min) &&
              (house.offer.price <= window.data.priceCheck[filters[i].value].max)) ||
             (filters[i].parentNode.name === 'housing-rooms' && String(house.offer.rooms) === filters[i].value) ||
             (filters[i].parentNode.name === 'housing-guests' && String(house.offer.guests) === filters[i].value)
