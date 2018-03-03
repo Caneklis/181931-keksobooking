@@ -37,6 +37,7 @@
     for (var i = 0; i < formFieldets.length; i++) {
       formFieldets[i].disabled = false;
     }
+    validateNoticeForm();
   };
 
   /**
@@ -69,7 +70,6 @@
       compareRoomsGuests(target.value);
     });
   };
-  validateNoticeForm();
 
   var compareRoomsGuests = function (value) {
     if (+value !== 100) {
@@ -121,6 +121,7 @@
   });
 
   noticeForm.addEventListener('submit', function (evt) {
+    validateNoticeForm();
     evt.preventDefault();
     window.backend.upload(new FormData(noticeForm), window.utils.showError);
     returnInitialPageState();

@@ -35,13 +35,13 @@
     xhr.send();
   };
 
-  var upload = function (data, onSuccess, onError) {
+  var upload = function (data, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
       if (xhr.status === SUCCESS) {
-        onSuccess(xhr.response);
+        onError('Форма успешно отправлена');
       } else if (xhr.status === BAD_REQUEST_ERROR) {
         onError('Ошибка: ' + xhr.status + '' + xhr.statusText);
       } else if (xhr.status === INTERNAL_SERVER_ERROR) {
