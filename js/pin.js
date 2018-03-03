@@ -3,6 +3,7 @@
 (function () {
   var BUTTON_WIDTH = 50;
   var BUTTON_HEIGHT = 70;
+  var PINS_QUANTITY = 5;
 
   /**
    * Функция создания DOM-элементов меткок на карте
@@ -24,9 +25,9 @@
 
     mapPins.appendChild(buttons);
 
-    var mapPin = document.querySelectorAll('.map__pin:not(.map__pin--main)');
-    for (i = 0; i < mapPin.length; i++) {
-      mapPin[i].addEventListener('click', onPinClickhandler);
+    var mapPinsArray = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    for (i = 0; i < mapPinsArray.length; i++) {
+      mapPinsArray[i].addEventListener('click', onPinClickhandler);
     }
   };
 
@@ -42,6 +43,6 @@
 
 
   window.pin = {
-    createButtons: createButtons,
+    createButtons: createButtons
   };
 })();
