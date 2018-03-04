@@ -38,10 +38,10 @@
   var onPinClickhandler = function (evt) {
     var target = evt.currentTarget;
     var offerId = target.getAttribute('data-id');
-    if (window.sortedArr[offerId]) {
-      window.createPopUp(window.sortedArr[offerId]);
+    if (window.data.sortedArr[offerId]) {
+      window.createPopUp(window.data.sortedArr[offerId]);
     } else {
-      window.createPopUp(window.housesArr[offerId]);
+      window.createPopUp(window.data.housesArr[offerId]);
     }
   };
 

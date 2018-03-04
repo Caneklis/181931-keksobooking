@@ -10,7 +10,8 @@
     window.pin.removeAllPins();
 
     var filters = formFilters.querySelectorAll('input:checked, option:checked');
-    var similarHouses = window.housesArr.filter(function (house) {
+    var similarHouses = window.data.housesArr.filter(function (house) {
+      window.popup.close();
       var flag = true;
       for (var i = 0; i < filters.length; i++) {
         if (!(
@@ -29,13 +30,14 @@
       }
       return flag;
     });
+
     if (similarHouses.length > 0) {
       map.classList.remove('map--faded');
       window.popup.close();
       window.pin.createButtons(similarHouses);
     }
 
-    window.sortedArr = similarHouses;
+    window.data.sortedArr = similarHouses;
   };
 
   var formFilters = document.querySelector('.map__filters');
