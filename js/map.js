@@ -24,7 +24,7 @@
    * @param {Array} data данные с сервера
    */
   var getData = function (data) {
-    window.housesArr = data;
+    window.data.housesArr = data;
     window.pin.createButtons(data);
   };
 

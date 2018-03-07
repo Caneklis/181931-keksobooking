@@ -21,10 +21,12 @@
   };
 
   window.noticeForm = document.querySelector('.notice__form');
-  window.housesArr = [];
-  window.sortedArr = [];
+  var housesArr = [];
+  var sortedArr = [];
 
   window.data = {
-    priceCheck: PRICE_CHECK
+    priceCheck: PRICE_CHECK,
+    housesArr: housesArr,
+    sortedArr: sortedArr
   };
 })();
